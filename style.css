@@ -207,3 +207,11 @@ td{
 .total{
     margin-top: 1rem;
 }
+
+/* medias queries*/
+
+@media (min-width:500px){
+    .conteiner-entregas-do-dia{
+        width: 100%;
+    }
+}
