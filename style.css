@@ -1,0 +1,209 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-image: linear-gradient(90deg,rgb(1, 1, 85)
+    ,rgb(184, 58, 58));
+}
+
+/* style pagina inicial */
+.calendario{
+    margin: auto;
+    margin-top: 2rem;
+    width: 30rem;
+    padding: 2rem;
+    min-height: 25rem;
+}
+
+.cabecalho{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+    color: white;
+}
+
+.cabecalho h2{
+    font-size: 2rem;
+}
+
+.cabecalho button{
+    padding: 0.5rem;
+    font-size: 2rem;
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+
+.conteudo-calendario{
+    margin: auto;
+    display: grid;
+    grid-template: repeat(4,1fr) / repeat(7,1fr);
+    gap: 0.5rem;
+}
+
+.conteudo-calendario button{
+    padding: 0.7rem;
+    font-size: 1.5rem;
+    background-color: transparent;
+    border: 2px solid white;
+    color:white;
+}
+
+.dias-da-semana{
+    color: white;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: space-around;
+}
+
+.conteudo-calendario button.dias-passados{
+    background-color: gray;
+    border: none;
+    color: red;
+}
+
+.conteudo-calendario button.dia-atual{
+    border: solid green;
+}
+
+.conteudo-calendario button.dia-ENtrega{
+    border: solid white;
+    background-color: green;
+    color: white;
+}
+
+.conteudo-calendario button.vazio{
+    background-color: transparent;
+    border: none;
+}
+
+/* style registrar entregas */
+
+.conteiner-registrarEntregas{
+    width: 30rem;
+    margin: auto;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.registrar-entregas{
+    display: grid;
+    grid-template: repeat(1,1fr) / repeat(2,1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.registrar-entregas label{
+    margin-left: 1rem;
+    font-size: 1.3rem;
+    color: white;
+}
+
+.registrar-entregas section{
+    border: solid white;
+    padding: 1rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.registrar-entregas input.quantidade{
+    padding: 0.2rem;
+    width: 3rem;
+    font-size: 1.4rem;
+}
+
+.registrar-entregas input.checkbox{
+    accent-color: green;
+    transform: scale(2);
+    border: solid red;
+}
+
+.registrar-entregas input.checkbox:checked{
+    transform: scale(2.1);
+}
+
+.div-butoes button{
+    padding: 0.5rem 2rem 0.5rem 2rem;
+    font-size: 1.8rem;
+    border-radius: 1rem;
+}
+
+.div-butoes{
+    display: flex;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 30rem;
+    gap: 0.5rem;
+    grid-area: 20/1 / 21/3;
+}
+
+.registrar-entregas section.selecionado{
+    border: solid green 5px;
+    color: blue;
+}
+
+/* style mostrar entregas do dia */
+
+.conteiner-entregas-do-dia{
+    width: 40rem;
+    margin: auto;
+    margin-top: 2rem;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2{
+    color: white;
+}
+
+table{
+    margin-top: 2rem;
+    width: 100%;
+}
+
+th{
+    font-size: 1.8rem;
+    border: solid 1px #ccc;
+    border-radius: 1rem;
+    background-color: white;
+    padding: 0.7rem;
+}
+
+td{
+    color: blue;
+    background-color: white;
+    border: solid 1px #ccc;
+    font-size: 22px;
+    border-radius: 1rem;
+    padding: 0.5rem;
+}
+
+.conteiner-entregas-do-dia td.totalentrega{
+    margin-top: 1rem;
+    font-size: 1.8rem;
+    padding: 0.5rem;
+    color: green;
+    border-radius: 1rem;
+}
+
+.conteiner-entregas-do-dia button{
+    font-size: 1.5rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-left: 1rem;
+    margin-top: 1rem;
+}
+
+.total{
+    margin-top: 1rem;
+}

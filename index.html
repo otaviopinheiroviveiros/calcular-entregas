@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>calcular entregas</title>
+</head>
+<body>
+    <div class="calendario">
+        
+        <div class="cabecalho">
+        
+            <button id="voltarMes" style="margin-right: 1rem;"><</button>
+            <h2 id="MESatual"></h2>
+            <button id="adiantarMEs" style="margin-left: 1rem;">></button>
+        
+        </div>
+        <div class="dias-da-semana">
+            <h3>S</h3>
+            <h3>T</h3>
+            <h3>Q</h3>
+            <h3>Q</h3>
+            <h3>S</h3>
+            <h3>S</h3>
+            <h3>D</h3>
+        </div>
+        <div class="conteudo-calendario"></div>
+    
+    </div>
+    
+    <div class="conteiner-registrarEntregas">
+
+        <div class="registrar-entregas">
+        </div>
+        <div class="div-butoes">
+            <button style="color: red;" id="voltar-pgRG_ENTREGA">voltar</button>
+            <button style="color: blue;" id="calcularentregas">calcular</button>
+        </div>
+
+    </div>
+
+    <div class="conteiner-entregas-do-dia">
+        
+        <div>
+            <h2 id="dia-da-entrega"></h2>
+            <button style="color: green;" id="finalizar-dia">finalizar</button>
+            <button style="color: blue;" id="voltar-pagina-mostrarEntrega">voltar</button>
+        </div>
+        
+        <table>
+                <thead>
+                    <tr>
+                        <th>Local</th>
+                        <th>Taxa</th>
+                        <th>Quantidade</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+
+            <tbody id="corpoTabela">
+
+            </tbody>
+        </table>
+        <div class="total">
+
+        </div>
+    </div>
+
+<script src="script.js"></script>
+</body>
+</html>
