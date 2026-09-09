@@ -213,18 +213,12 @@ td{
     display: none;
 }
 
+
 /* medias queries*/
 
 @media (max-width:550px){
-    .conteiner-entregas-do-diaPC{
-        display: none !important;
-    }
-
-    .conteiner-tabela-mobile{
-        display: block;
-    }
-
-    .conteiner-tabela-mobile div{
+    
+    .conteudo_tela_mobile div{
         width: 20rem;
         margin: auto;
         background-color: antiquewhite;
@@ -251,6 +245,15 @@ td{
         background-color: white;
         border: solid gray;
         padding: 0.4rem;
+    }
+    
+    #voltar-pagina-tabelaMObile{
+        padding: 1rem;
+        font-size: 1.5rem;
+        margin-top: 1rem;
+        margin-left: 1rem;
+        border-radius: 20px;
+        color: blue;
     }
 
 

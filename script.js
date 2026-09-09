@@ -31,10 +31,12 @@ const diaENTREga = document.querySelector("#dia-da-entrega")
 const voltarDEmostrarENTREga_PRincipal = document.querySelector("#voltar-pagina-mostrarEntrega")
 const finalizar_dia = document.querySelector("#finalizar-dia")
 const conteiner_mostratTOtal = document.querySelector(".total")
-const conteinerModili = document.querySelector(".conteiner-tabela-mobile")
+const conteiner_tela_mobile = document.querySelector(".conteiner-tabela-mobile")
+const voltarpgINICial_MObile =  document.querySelector("#voltar-pagina-tabelaMObile")
+const conteudo_tela_mobile = document.querySelector(".conteudo_tela_mobile")
 
-
-voltarDEmostrarENTREga_PRincipal.addEventListener("click",voltardemostrartarefa)
+voltarDEmostrarENTREga_PRincipal.addEventListener("click",voltarPGinicial)
+voltarpgINICial_MObile.addEventListener("click",voltarTElamobile)
 finalizar_dia.addEventListener("click",finalizarorganizarClasse)
 
 
@@ -144,8 +146,11 @@ function criardiasDOMes(){
 
         dias.addEventListener("click", (event) =>{
             if(event.currentTarget.classList.contains("dia-ENtrega")){
-                dia_finalizado()
-                tabela_mobile()
+                if(window.innerWidth <= 550){
+                    tabela_mobile()
+                }else{
+                    dia_finalizado()
+                }
             }
         })
 
@@ -258,7 +263,7 @@ function mostrarTOtalEntergas(){
             conteiner_mostratTOtal.appendChild(totalENTrega)
 }
 
-function voltardemostrartarefa(){
+function voltarPGinicial(){
     conteiner_mostrarEntergas.style.display = "none"
     conteiner_calendario.style.display = "grid"
     conteiner_mostratTOtal.innerHTML = ""
@@ -310,15 +315,15 @@ function dia_finalizado(){
 }
 
 function tabela_mobile(){
-    console.log("ta entrando aqui")
+    conteiner_calendario.style.display = "none"
+    conteiner_tela_mobile.style.display = "block"
+    
     const entregadia = armazem_entregas.find(diaENcontrado =>{
-    return diaENcontrado.dia === dia
+        return diaENcontrado.dia === dia
     })
 
     if(entregadia){
         
-        conteiner_RG_entregas.style.display = "none"
-        conteiner_mostrarEntergas.style.display = "flex"
         
         entregadia.entregas.forEach(local => {
                 const linha = document.createElement("div")
@@ -335,7 +340,7 @@ function tabela_mobile(){
                 linha.append(taxa)
                 linha.append(quantidade)
                 linha.append(subtotal)
-                conteinerModili.appendChild(linha)
+                conteudo_tela_mobile.appendChild(linha)
                 
                 
         })
@@ -343,15 +348,11 @@ function tabela_mobile(){
         const totalENTrega = document.createElement("div")
         totalENTrega.classList.add("totalentrega")
         totalENTrega.textContent = `total de entregas: ${entregadia.total}`
-        conteinerModili.appendChild(totalENTrega)
+        conteudo_tela_mobile.appendChild(totalENTrega)
     }
 }
 
 function finalizarorganizarClasse(){
-    console.log("salvando", {
-    dia: hoje.getDate(),
-    mes: hoje.getMonth() + 1
-    })
     conteiner_mostrarEntergas.style.display = "none"
     conteiner_calendario.style.display = "grid"
     
@@ -367,4 +368,10 @@ function finalizarorganizarClasse(){
     
     diaclicado.classList.remove("dia-atual")
     diaclicado.classList.add("dia-ENtrega")
+}
+
+function voltarTElamobile(){
+    conteiner_calendario.style.display = "block"
+    conteiner_tela_mobile.style.display = "none"
+    conteudo_tela_mobile.innerHTML = ""
 }
