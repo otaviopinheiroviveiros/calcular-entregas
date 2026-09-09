@@ -153,8 +153,9 @@ body{
 
 /* style mostrar entregas do dia */
 
-.conteiner-entregas-do-dia{
+.conteiner-entregas-do-diaPC{
     width: 40rem;
+    border: solid red;
     margin: auto;
     margin-top: 2rem;
     display: none;
@@ -188,7 +189,7 @@ td{
     padding: 0.5rem;
 }
 
-.conteiner-entregas-do-dia td.totalentrega{
+.conteiner-entregas-do-diaPC td.totalentrega{
     margin-top: 1rem;
     font-size: 1.8rem;
     padding: 0.5rem;
@@ -196,7 +197,7 @@ td{
     border-radius: 1rem;
 }
 
-.conteiner-entregas-do-dia button{
+.conteiner-entregas-do-diaPC button{
     font-size: 1.5rem;
     padding: 1rem;
     border-radius: 1rem;
@@ -208,10 +209,49 @@ td{
     margin-top: 1rem;
 }
 
+.conteiner-tabela-mobile{
+    display: none;
+}
+
 /* medias queries*/
 
-@media (min-width:500px){
-    .conteiner-entregas-do-dia{
-        width: 100%;
+@media (max-width:550px){
+    .conteiner-entregas-do-diaPC{
+        display: none !important;
     }
+
+    .conteiner-tabela-mobile{
+        display: block;
+    }
+
+    .conteiner-tabela-mobile div{
+        width: 20rem;
+        margin: auto;
+        background-color: antiquewhite;
+        border-radius: 20px;
+        padding: 1rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .conteiner-tabela-mobile h3{
+        color: blue;
+        font-size: 1.5rem;
+    }
+
+    strong{
+        color: black;
+    }
+
+    .conteiner-tabela-mobile div.totalentrega{
+        text-align: center;
+        font-size: 2rem;
+        border: none;
+        color: green;
+        background-color: white;
+        border: solid gray;
+        padding: 0.4rem;
+    }
+
+
 }

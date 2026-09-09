@@ -25,12 +25,14 @@ const butao_do_calculo = document.querySelector("#calcularentregas")
 butao_do_calculo.addEventListener("click",calcularEntregas)
 
 // conteiner mostrar entregas
-const conteiner_mostrarEntergas = document.querySelector(".conteiner-entregas-do-dia")
+const conteiner_mostrarEntergas = document.querySelector(".conteiner-entregas-do-diaPC")
 const conteudo_mostrarENtregas = document.querySelector("#corpoTabela")
 const diaENTREga = document.querySelector("#dia-da-entrega")
 const voltarDEmostrarENTREga_PRincipal = document.querySelector("#voltar-pagina-mostrarEntrega")
 const finalizar_dia = document.querySelector("#finalizar-dia")
 const conteiner_mostratTOtal = document.querySelector(".total")
+const conteinerModili = document.querySelector(".conteiner-tabela-mobile")
+
 
 voltarDEmostrarENTREga_PRincipal.addEventListener("click",voltardemostrartarefa)
 finalizar_dia.addEventListener("click",finalizarorganizarClasse)
@@ -143,6 +145,7 @@ function criardiasDOMes(){
         dias.addEventListener("click", (event) =>{
             if(event.currentTarget.classList.contains("dia-ENtrega")){
                 dia_finalizado()
+                tabela_mobile()
             }
         })
 
@@ -219,7 +222,6 @@ function calcularEntregas(){
         entregas.push({nome:calcular.nome,taxa:calcular.taxa,quantidade:calcular.quantidade,sub_total:resultado})
     })
 
-    // dia_registro_ENtrega = `0${hoje.getDate()}/0${hoje.getMonth()+1}/${hoje.getFullYear()}`
     mostrarTOtalEntergas()
 }
 
@@ -249,7 +251,6 @@ function mostrarTOtalEntergas(){
                 conteudo_mostrarENtregas.appendChild(linha)
 
                 total += local.sub_total
-                
             })
             const totalENTrega = document.createElement("td")
             totalENTrega.classList.add("totalentrega")
@@ -265,7 +266,7 @@ function voltardemostrartarefa(){
     entregas = []
 }
 
-function dia_finalizado(){
+function dia_finalizado(){    
     conteiner_calendario.style.display = "none"
     conteiner_mostratTOtal.innerHTML = ""
     finalizar_dia.style.visibility = "hidden"
@@ -296,6 +297,7 @@ function dia_finalizado(){
                 linha.append(subtotal)
                 conteudo_mostrarENtregas.appendChild(linha)
                 
+                
         })
 
         const totalENTrega = document.createElement("td")
@@ -305,6 +307,44 @@ function dia_finalizado(){
 
     }
     
+}
+
+function tabela_mobile(){
+    console.log("ta entrando aqui")
+    const entregadia = armazem_entregas.find(diaENcontrado =>{
+    return diaENcontrado.dia === dia
+    })
+
+    if(entregadia){
+        
+        conteiner_RG_entregas.style.display = "none"
+        conteiner_mostrarEntergas.style.display = "flex"
+        
+        entregadia.entregas.forEach(local => {
+                const linha = document.createElement("div")
+                const nome = document.createElement("h3")
+                const taxa = document.createElement("h3")
+                const quantidade = document.createElement("h3")
+                const subtotal = document.createElement("h3")
+                
+                nome.innerHTML = `local: <strong>${local.nome}</strong>`
+                taxa.innerHTML = `taxa: <strong>${local.taxa}</strong>`
+                quantidade.innerHTML = `<p>Quantidade: <strong>${local.quantidade}</strong>`
+                subtotal.innerHTML = `subTotal: <strong>${local.sub_total}</strong>`
+                linha.append(nome)
+                linha.append(taxa)
+                linha.append(quantidade)
+                linha.append(subtotal)
+                conteinerModili.appendChild(linha)
+                
+                
+        })
+
+        const totalENTrega = document.createElement("div")
+        totalENTrega.classList.add("totalentrega")
+        totalENTrega.textContent = `total de entregas: ${entregadia.total}`
+        conteinerModili.appendChild(totalENTrega)
+    }
 }
 
 function finalizarorganizarClasse(){
