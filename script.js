@@ -36,7 +36,6 @@ const voltarpgINICial_MObile =  document.querySelector("#voltar-pagina-tabelaMOb
 const conteudo_tela_mobile = document.querySelector(".conteudo_tela_mobile")
 
 voltarDEmostrarENTREga_PRincipal.addEventListener("click",voltarPGinicial)
-voltarpgINICial_MObile.addEventListener("click",voltarTElamobile)
 finalizar_dia.addEventListener("click",finalizarorganizarClasse)
 
 
@@ -134,7 +133,8 @@ function criardiasDOMes(){
         
 
         if(MESatual === hoje.getMonth() && i === hoje.getDate()){
-            dias.addEventListener("click",registrarEntregas)
+            dias.addEventListener("click",()=>{
+                registrarEntregas(localidades)})
             dias.classList.add("dia-atual")
         }
         
@@ -158,12 +158,19 @@ function criardiasDOMes(){
     }
 }
 
-function registrarEntregas(){
+const buscarLOCal = document.getElementById("buscarLocalDEentrega")
+buscarLOCal.addEventListener("input",()=>{
+    const texto = buscarLOCal.value.toLowerCase();
+    const localPesquisado =  localidades.filter(produto => produto.nome.toLowerCase().includes(texto))
+    registrarEntregas(localPesquisado)
+})
+
+function registrarEntregas(localPesquisado){
     conteiner_calendario.style.display = "none"
     conteiner_RG_entregas.style.display = "flex"
-
-    localidades.sort((nome1,nome2) => nome1.nome.localeCompare(nome2.nome))
-    localidades.forEach(local => {
+    conteudo_registrarENTREGA.innerHTML = ""
+    localPesquisado.sort((nome1,nome2) => nome1.nome.localeCompare(nome2.nome))
+    localPesquisado.forEach(local => {
         const opcao = document.createElement("section")
         
         const checkbox = document.createElement("input")
@@ -221,7 +228,10 @@ function mostrarREusltado(){
 }
 
 function calcularEntregas(){
-    console.log(localselecionado)
+    if(localselecionado < 1){
+        alert("selecione as localidas!")
+        return
+    }
     localselecionado.forEach(calcular =>{
         let resultado = calcular.taxa * calcular.quantidade
         entregas.push({nome:calcular.nome,taxa:calcular.taxa,quantidade:calcular.quantidade,sub_total:resultado})
@@ -234,7 +244,7 @@ function mostrarTOtalEntergas(){
     finalizar_dia.style.visibility = "visible"
     conteiner_RG_entregas.style.display = "none"
     conteiner_mostrarEntergas.style.display = "flex"
-    diaENTREga.textContent = `dia: 0${hoje.getDate()}/0${hoje.getMonth()+1}/${hoje.getFullYear()}`
+    diaENTREga.textContent = `dia: 0${hoje.getDate()}/${hoje.getMonth()+1}/${hoje.getFullYear()}`
             
             let total = 0
             
@@ -246,9 +256,9 @@ function mostrarTOtalEntergas(){
                 const subtotal = document.createElement("td")
                 
                 nome.textContent = local.nome
-                taxa.textContent = `taxa: ${local.taxa}`
-                quantidade.textContent = `Quantidade:${local.quantidade}`
-                subtotal.textContent = `subTotal: ${local.sub_total}`
+                taxa.textContent = `${local.taxa}`
+                quantidade.textContent = `${local.quantidade}`
+                subtotal.textContent = `${local.sub_total}`
                 linha.append(nome)
                 linha.append(taxa)
                 linha.append(quantidade)
@@ -271,7 +281,7 @@ function voltarPGinicial(){
     entregas = []
 }
 
-function dia_finalizado(){    
+function dia_finalizado(){
     conteiner_calendario.style.display = "none"
     conteiner_mostratTOtal.innerHTML = ""
     finalizar_dia.style.visibility = "hidden"
@@ -312,44 +322,6 @@ function dia_finalizado(){
 
     }
     
-}
-
-function tabela_mobile(){
-    conteiner_calendario.style.display = "none"
-    conteiner_tela_mobile.style.display = "block"
-    
-    const entregadia = armazem_entregas.find(diaENcontrado =>{
-        return diaENcontrado.dia === dia
-    })
-
-    if(entregadia){
-        
-        
-        entregadia.entregas.forEach(local => {
-                const linha = document.createElement("div")
-                const nome = document.createElement("h3")
-                const taxa = document.createElement("h3")
-                const quantidade = document.createElement("h3")
-                const subtotal = document.createElement("h3")
-                
-                nome.innerHTML = `local: <strong>${local.nome}</strong>`
-                taxa.innerHTML = `taxa: <strong>${local.taxa}</strong>`
-                quantidade.innerHTML = `<p>Quantidade: <strong>${local.quantidade}</strong>`
-                subtotal.innerHTML = `subTotal: <strong>${local.sub_total}</strong>`
-                linha.append(nome)
-                linha.append(taxa)
-                linha.append(quantidade)
-                linha.append(subtotal)
-                conteudo_tela_mobile.appendChild(linha)
-                
-                
-        })
-
-        const totalENTrega = document.createElement("div")
-        totalENTrega.classList.add("totalentrega")
-        totalENTrega.textContent = `total de entregas: ${entregadia.total}`
-        conteudo_tela_mobile.appendChild(totalENTrega)
-    }
 }
 
 function finalizarorganizarClasse(){
